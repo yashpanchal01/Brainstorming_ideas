@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python Cheatsheet</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #6b6b6b;
+    --accent: #2b6cb0;
+    --code-bg: #f5f5f5;
+    --border: #e2e2e2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161a;
+      --fg: #e8e8e8;
+      --muted: #9a9a9a;
+      --accent: #7cb0f0;
+      --code-bg: #1f2226;
+      --border: #2a2d32;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    padding: 1rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 1.5rem;
+    margin: 0 0 0.25rem;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 0 0 1.25rem;
+  }
+  input[type="search"] {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    font-size: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--code-bg);
+    color: var(--fg);
+    margin-bottom: 1.25rem;
+  }
+  section {
+    margin-bottom: 1.5rem;
+  }
+  h2 {
+    font-size: 1.05rem;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.35rem;
+    margin: 0 0 0.75rem;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    padding-top: 0.25rem;
+  }
+  .item {
+    margin-bottom: 0.85rem;
+  }
+  .item .label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 0.2rem;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.6rem 0.75rem;
+    overflow-x: auto;
+    margin: 0;
+    font-size: 0.85rem;
+  }
+  code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+  }
+  .item.hidden { display: none; }
+  footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  footer a { color: var(--accent); }
+  @media print {
+    input[type="search"] { display: none; }
+    h2 { position: static; }
+    body { max-width: none; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Python Cheatsheet</h1>
+<p class="subtitle">Quick reference — syntax, built-ins, and common patterns.</p>
+
+<input type="search" id="filter" placeholder="Search (e.g. 'loop', 'dict', 'try')" oninput="filterItems(this.value)">
+
+<section>
+<h2>Variables & Types</h2>
+<div class="item" data-kw="variable type int float str bool none">
+  <div class="label">Basic types</div>
+  <pre><code>x = 5            # int
+y = 3.14         # float
+name = "Ada"     # str
+ok = True        # bool
+nothing = None   # NoneType</code></pre>
+</div>
+<div class="item" data-kw="type check isinstance">
+  <div class="label">Type checking</div>
+  <pre><code>type(x)              # &lt;class 'int'&gt;
+isinstance(x, int)   # True</code></pre>
+</div>
+</section>
+
+<section>
+<h2>Strings</h2>
+<div class="item" data-kw="fstring format string interpolation">
+  <div class="label">f-strings</div>
+  <pre><code>name = "Ada"
+f"Hello, {name}!"
+f"{3.14159:.2f}"     # '3.14'</code></pre>
+</div>
+<div class="item" data-kw="string methods split join strip replace">
+  <div class="label">Common methods</div>
+  <pre><code>"a,b,c".split(",")     # ['a','b','c']
+",".join(["a","b"])    # 'a,b'
+"  hi ".strip()        # 'hi'
+"hi".replace("h","H")  # 'Hi'
+"hi".upper() / .lower()</code></pre>
+</div>
+<div class="item" data-kw="slice slicing substring">
+  <div class="label">Slicing</div>
+  <pre><code>s = "hello"
+s[1:4]     # 'ell'
+s[::-1]    # 'olleh' (reverse)</code></pre>
+</div>
+</section>
+
+<section>
+<h2>Data Structures</h2>
+<div class="item" data-kw="list append pop insert">
+  <div class="label">List</div>
+  <pre><code>lst = [1, 2, 3]
+lst.append(4)
+lst.pop()          # removes & returns last
+lst.insert(0, 0)
+lst[0], lst[-1]    # first, last</code></pre>
+</div>
+<div class="item" data-kw="dict dictionary key value get">
+  <div class="label">Dict</div>
+  <pre><code>d = {"a": 1, "b": 2}
+d["a"]             # 1
+d.get("c", 0)      # 0 (default)
+d.keys() / .values() / .items()</code></pre>
+</div>
+<div class="item" data-kw="set unique">
+  <div class="label">Set</div>
+  <pre><code>s = {1, 2, 3}
+s.add(4)
+s1 & s2   # intersection
+s1 | s2   # union</code></pre>
+</div>
+<div class="item" data-kw="tuple immutable">
+  <div class="label">Tuple</div>
+  <pre><code>t = (1, 2, 3)   # immutable
+a, b, c = t     # unpacking</code></pre>
+</div>
+<div class="item" data-kw="comprehension list dict">
+  <div class="label">Comprehensions</div>
+  <pre><code>[x*2 for x in range(5)]
+{x: x*2 for x in range(3)}
+[x for x in range(10) if x % 2 == 0]</code></pre>
+</div>
+</section>
+
+<section>
+<h2>Control Flow</h2>
+<div class="item" data-kw="if else elif condition">
+  <div class="label">Conditionals</div>
+  <pre><code>if x > 0:
+    print("pos")
+elif x == 0:
+    print("zero")
+else:
+    print("neg")</code></pre>
+</div>
+<div class="item" data-kw="for loop range enumerate">
+  <div class="label">For loop</div>
+  <pre><code>for i in range(5):
+    print(i)
+
+for i, val in enumerate(lst):
+    print(i, val)</code></pre>
+</div>
+<div class="item" data-kw="while loop">
+  <div class="label">While loop</div>
+  <pre><code>while x > 0:
+    x -= 1</code></pre>
+</div>
+<div class="item" data-kw="break continue">
+  <div class="label">Break / continue</div>
+  <pre><code>for i in range(10):
+    if i == 5: break
+    if i % 2 == 0: continue</code></pre>
+</div>
+</section>
+
+<section>
+<h2>Functions</h2>
+<div class="item" data-kw="function def args default">
+  <div class="label">Definition</div>
+  <pre><code>def greet(name, greeting="Hi"):
+    return f"{greeting}, {name}!"
+
+greet("Ada")               # 'Hi, Ada!'
+greet("Ada", "Hello")</code></pre>
+</div>
+<div class="item" data-kw="lambda anonymous">
+  <div class="label">Lambda</div>
+  <pre><code>square = lambda x: x * x
+sorted(lst, key=lambda x: -x)</code></pre>
+</div>
+<div class="item" data-kw="args kwargs unpacking star">
+  <div class="label">*args / **kwargs</div>
+  <pre><code>def f(*args, **kwargs):
+    print(args, kwargs)
+
+f(1, 2, a=3)   # (1, 2) {'a': 3}</code></pre>
+</div>
+</section>
+
+<section>
+<h2>Error Handling</h2>
+<div class="item" data-kw="try except finally exception error">
+  <div class="label">Try / except</div>
+  <pre><code>try:
+    1 / 0
+except ZeroDivisionError as e:
+    print(e)
+finally:
+    print("done")</code></pre>
+</div>
+<div class="item" data-kw="raise custom exception">
+  <div class="label">Raising errors</div>
+  <pre><code>raise ValueError("bad input")</code></pre>
+</div>
+</section>
+
+<section>
+<h2>Classes (OOP)</h2>
+<div class="item" data-kw="class oop object init self">
+  <div class="label">Basic class</div>
+  <pre><code>class Dog:
+    def __init__(self, name):
+        self.name = name
+
+    def bark(self):
+        return f"{self.name} says woof"
+
+d = Dog("Rex")
+d.bark()</code></pre>
+</div>
+<div class="item" data-kw="inheritance super subclass">
+  <div class="label">Inheritance</div>
+  <pre><code>class Puppy(Dog):
+    def __init__(self, name):
+        super().__init__(name)</code></pre>
+</div>
+</section>
+
+<section>
+<h2>File I/O</h2>
+<div class="item" data-kw="file open read write">
+  <div class="label">Reading/writing</div>
+  <pre><code>with open("f.txt") as f:
+    content = f.read()
+
+with open("f.txt", "w") as f:
+    f.write("hello")</code></pre>
+</div>
+</section>
+
+<section>
+<h2>Useful Built-ins</h2>
+<div class="item" data-kw="builtin len sum max min sorted">
+  <div class="label">Common functions</div>
+  <pre><code>len(lst), sum(lst)
+max(lst), min(lst)
+sorted(lst, reverse=True)
+zip(list1, list2)
+map(func, lst), filter(func, lst)</code></pre>
+</div>
+</section>
+
+<footer>
+  Reference document · <a href="https://docs.python.org/3/" target="_blank" rel="noopener">docs.python.org</a> · Ask your teacher follow-up questions anytime.
+</footer>
+
+<script>
+function filterItems(query) {
+  const q = query.trim().toLowerCase();
+  document.querySelectorAll('.item').forEach(item => {
+    const kw = item.getAttribute('data-kw') || '';
+    const text = item.textContent.toLowerCase();
+    const match = !q || kw.includes(q) || text.includes(q);
+    item.classList.toggle('hidden', !match);
+  });
+  document.querySelectorAll('section').forEach(sec => {
+    const visible = [...sec.querySelectorAll('.item')].some(i => !i.classList.contains('hidden'));
+    sec.style.display = visible ? '' : 'none';
+  });
+}
+</script>
+
+</body>
+</html>
